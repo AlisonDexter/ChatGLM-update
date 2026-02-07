@@ -1,0 +1,564 @@
+/*--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+--*/
+/* reset code */
+/* 统一样式的输入框和按钮 */
+
+/* 弹窗样式 */
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+}
+
+.modal-content {
+    background-color: rgb(108, 99, 99); /* 弹窗背景为白色 */
+    margin: 10% auto; /* 上下左右居中 */
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px; /* 弹窗最大宽度 */
+    position: relative;
+    text-align: center;
+}
+
+/* 弹窗顶部 Logo */
+.modal-content::before {
+    content: "";
+    display: block;
+    background: url('D:\Age_copy\static\assets\images\logo\light-logo.png') no-repeat center center;
+    background-size: contain;
+    width: 100px; /* Logo 宽度 */
+    height: 100px; /* Logo 高度 */
+    margin: -60px auto 20px; /* 将 Logo 向上移动 */
+}
+
+/* 关闭按钮 */
+.close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}
+
+/* 表单样式 */
+.signin-form {
+    margin-top: 20px;
+}
+
+/* 统一输入框和按钮样式 */
+.form-input input,
+.form-input button {
+    width: 100%;
+    height: 45px;
+    border-radius: 20px;
+    margin: 10px 0;
+    padding: 0 15px;
+}
+
+/* 垂直排列 */
+/* 表单容器 */
+.forms-gds {
+    display: flex !important; /* 覆盖原有grid布局 */
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+
+/* 输入框和按钮统一样式 */
+.form-control {
+    width: 100%;
+    height: 45px;
+    border-radius: 8px;
+    padding: 0 15px;
+    border: 1px solid #007bff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: 2px solid #87CEEB;
+    border-color: transparent;
+}
+
+/* 按钮特殊样式 */
+button.form-control {
+	background:#007bff;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+button.form-control:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+/* 标签样式 */
+.input-label {
+    display: block;
+    text-align: left;
+    
+	margin-left: 10px;
+    color: rgb(84, 84, 84);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+/* 链接样式 */
+.already {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.already a {
+    color: #87CEEB; /* 链接颜色 */
+    text-decoration: none;
+}
+
+.already a:hover {
+    text-decoration: underline;
+}
+.input-box {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: white;
+    color: #333; 
+}
+.input-box:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+
+/* 确保输入框和按钮在移动设备上的显示效果 */
+@media screen and (max-width: 600px) {
+    .input-box {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  /* color: #585858; */
+}
+
+* {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+
+@media (min-width: 576px) {
+  .wrapper {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .wrapper {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .wrapper {
+    max-width: 1140px;
+  }
+}
+
+.img-responsive {
+  max-width: 100%;
+  display: block;
+}
+
+.img-fluid {
+  width: 100%;
+}
+
+.d-grid {
+  display: grid;
+}
+
+.d-flex {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+button,
+input,
+select {
+  -webkit-appearance: none;
+  outline: none;
+}
+
+button,
+.btn,
+select {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+iframe {
+  border: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+.p-relative {
+  position: relative;
+}
+
+.p-absolute {
+  position: absolute;
+}
+
+.p-fixed {
+  position: fixed;
+}
+
+.p-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+body a:hover,
+body button:hover {
+  opacity: .8;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  color: #050404;
+}
+
+p {
+  color: #585858;
+}
+
+
+.form-26 {
+    display: flex;
+    min-height: 100vh;
+
+	    background: linear-gradient(169deg, #ffffff 30%, #004cffd4 100%);
+}
+
+.left-panel {
+	flex: 0 0 50%; /* 固定50%宽度 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+   
+}
+
+.right-panel {
+	width: 70%;
+	background-size: 500px auto; /* 最大宽度600px */
+	max-width: 750px; /* 容器最大宽度 */
+	padding: 20px;
+	/* background:#fff3e0;  */
+    flex:  0 0 50%; /* 固定50%宽度 */
+	background-image: url("../images/hero-image/hero-1.jpg");
+    /* background-size: cover; */
+	background-position: center;
+    border-radius: 25px; /* 新增圆角 */
+    margin: 20px; /* 添加外边距显示圆角效果 */
+	min-height: 30vh; /* 保证高度铺满 */
+    overflow: hidden; /* 确保背景图片也被裁剪出圆角 */
+    box-shadow: 0 0 15px rgba(0,0,0,0.1); /* 可选添加阴影增强立体感 */
+}
+@media (max-width: 768px) {
+	.form-26 {
+		flex-direction: column;
+		min-height: auto;
+	}
+	.right-panel {
+		order: -1; /* 让图片面板显示在上方 */
+		flex: 1 0 100%; /* 移动端占满宽度 */
+        min-height: 50vh; /* 保持适当高度 */
+        border-radius: 15px 15px 0 0; /* 移动端只保留顶部圆角 */
+        margin: 15px 15px 0 15px; /* 调整外边距 */
+    }
+    .left-panel {
+        border-radius: 0 0 10px 10px; /* 底部圆角 */
+        margin: 0 15px 15px 15px;
+		padding: 3rem 2rem;
+    }
+	/* 移除原有移动端padding设置 */
+    .form-inner-cont {
+        padding: 2rem !important;
+    }
+}
+
+	.forms-26-info h2{
+		
+		color: #2c3e50;
+    font-size: 2.5rem;
+    /* margin-bottom: 2rem; */
+	}
+	.forms-26-info p {
+		
+		color: #7f8c8d; /* 浅灰色 */
+		line-height: 1.6;
+	}
+	
+	h6.already {
+		margin: 10px 0 0;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 15px;
+		line-height: 25px;
+		color: #434343;
+	}
+
+
+	.form-inner-cont {
+		max-width: 450px;
+		width: 100%;
+		padding: 2rem;
+		/* text-align: center; */
+	}
+	p.action-link{
+		 text-align:left;
+		 padding:0;
+	}
+	 .form-inner-cont a {
+		color: #6168a9;
+		font-weight: 700;
+		text-decoration: none;
+		margin-bottom: 10px;
+		display: inline-block;
+	}
+	.form-inner-cont a:hover {
+    text-decoration: underline;
+	}
+	.copyright p {
+    margin-top: 120px;
+	color: #ffffffd6;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 25px;
+	}
+
+	/*-- //forms-26 --*/
+	/*-- /responsive-start --*/
+	/* @media all and (max-width:992px) {
+		 .form-inner-cont {
+			padding: 12em 0 0 0;
+		}
+	} */
+	@media all and (max-width:736px) {
+	.form-inner-cont {
+			padding: 12em 0 0 0;
+		}
+	}
+	@media all and (max-width:568px) {
+	 .forms-26-info h2 {
+			font-size: 45px;
+			line-height: 55px;
+	}
+}
+	@media all and (max-width: 600px) {
+		.forms-26-info h2 {
+			font-size: 50px;
+			line-height: 60px;
+		}
+		 .form-inner-cont {
+			padding: 8em 0 0 0;
+		}
+	}
+	@media all and (max-width: 480px) {
+	.forms-26-info h2 {
+			font-size: 40px;
+			line-height: 50px;
+		}
+		 .forms-gds {
+			grid-template-columns: 1fr;
+		}
+				.copyright p {
+    margin-top: 120px;
+	
+	}
+	}
+
+	@media all and (max-width: 414px) { 
+	.forms-26-info p {
+			font-size: 17px;
+			line-height: 25px;
+			margin: 30px 0;
+		}
+	}
+	@media all and (max-width:384px) { 
+		.forms-26-info p {
+			font-size: 15px;
+			line-height: 25px;
+			margin: 25px 0;
+		}
+		.form-inner-cont {
+			padding: 6em 0 0 0;
+		}
+		 .forms-26-info h2 {
+			font-size: 35px;
+			line-height: 45px;
+		}
+	}
+	/* 新增动画样式 */
+.shape {
+    position: absolute;
+    z-index: 1;
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape-1 {
+    top: 15%;
+    left: 10%;
+    width: 120px;
+}
+
+.shape-2 {
+    bottom: 20%;
+    right: 10%;
+    width: 80px;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.right-panel {
+    position: relative;
+    overflow: visible;
+}
+
+/* 优化现有样式 */
+.form-inner-cont {
+    position: relative;
+    z-index: 2;
+    /* background: rgba(255, 255, 255, 0.95); */
+    backdrop-filter: blur(5px);
+    /* box-shadow: 0 10px 30px rgba(0,0,0,0.1); */
+}
+
+.forms-26-info h2 {
+    animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+@keyframes text-focus-in {
+    0% { filter: blur(12px); opacity: 0; }
+    100% { filter: blur(0); opacity: 1; }
+}
+	/*-- //responsive-end --*/
+
+/* 注册的按钮样式 */
+.custom-submit-btn{
+	background: #007bff;
+	color: rgb(82, 82, 82);
+	font-weight: 600;
+	letter-spacing: 1px;
+	transition: all 0.3s ease;
+	margin-top: 15px;
+	margin-bottom: 15px;
+  }
+  
+  .custom-submit-btn:hover {
+	background: #e3ba34;
+	transform: translateY(-2px);
+  }
+/* 返回主页的按钮 */
+  .home-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #007bff;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.home-btn:hover {
+    background: #e3ba34;
+    transform: translateY(-2px);
+}

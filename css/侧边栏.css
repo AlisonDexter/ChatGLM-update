@@ -1,0 +1,177 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+}
+
+.sidebar1 {
+    width: 100px;
+    background-color: #f3f9ff;
+    color: white;
+    height: 100vh;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed; /* 固定定位，确保侧边栏1不会影响 main-content 的宽度 */
+    left: 0;
+    top: 0;
+    z-index: 1000; /* 设置一个较低的 z-index */
+}
+
+.sidebar1 button {
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 15px;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: rgb(255, 255, 255);
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: width 0.3s ease, padding 0.3s ease;
+    
+}
+
+.sidebar1 button:hover {
+    background-color: #bee5ff;
+}
+
+.sidebar1 #new-chat-btn:hover::after {
+    
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+
+.sidebar2 {
+    width: 200px;
+    background-color: #f3f9ff;
+    color: var(--dsr-text-1);
+    height: 100vh;
+    padding: 30px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+    transform: translateX(-190px);
+    position: fixed;
+    left: 0px;
+    top: 0;
+    font-size: 12px;
+    z-index: 1001;
+}
+
+.sidebar2.expanded {
+    transform: translateX(0);
+}
+
+.sidebar2 button {
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 15px;
+    width: 100%;
+    padding: 10px;
+    background-color:#007bff;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: width 0.3s ease, padding 0.3s ease;
+}
+
+.sidebar2 button:hover {
+    background-color: #7dcbff;
+}
+
+.chat-history {
+    height: 60Svh; /* 设置一个固定高度，可以根据需要调整 */
+    overflow-y: auto; /* 添加垂直滚动条 */
+    
+}
+
+.chat-history h3 {
+    font-weight: 600;
+    padding: 0 10px 0 5px;
+    margin: 6px 0 0 0;
+    color: #555;
+    margin-top: 0;
+    margin-left: 4px;
+}
+
+.chat-history ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.chat-history ul li {
+    white-space: nowrap;
+    position: relative;
+    line-height: 18px;
+    display: flex; /* 启用 flexbox */
+    align-items: center; /* 垂直居中 */
+    height: 38px;
+    color: #363636;
+    font-weight: 500;
+    font-size: 12px;
+    border-radius: 15px;
+    padding: 0 10px;
+    cursor: pointer;
+    border-bottom: 1px solid rgb(var(--ds-rgb-blue-100));
+}
+
+/* Tooltip文本样式 */
+.bubble {
+    position: relative; /* 确保伪元素可以正确定位 */
+}
+
+.bubble::after {
+    content: attr(data-tooltip);
+    visibility: hidden;
+    width: max-content;
+    background-color: rgba(94, 52, 52, 0.632); /* 更透明的棕色 */
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    margin: 5px 0;
+    padding: 10px 15px;
+    position: absolute;
+    z-index: 1000; /* 确保Tooltip在最上层 */
+    left: 160%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.bubble:hover::after {
+    visibility: visible;
+    opacity: 1;
+}
+.chat-history ul li:hover {
+    background-color: #0057b4
+}
+
+.main-content {
+    flex-grow: 1; /* 使 main-content 占据剩余空间 */
+    transition: margin-left 0.3s ease; /* 添加过渡效果 */
+    margin-left: 100px; /* 初始状态下，侧边栏1的宽度为100px */
+    overflow: auto; /* 添加滚动条，防止内容溢出 */
+    z-index: 1; /* 设置一个较低的 z-index */
+}
+
+.main-content.expanded {
+    margin-left: 00px;/* 侧边栏2展开时，侧边栏1宽度100px + 侧边栏2宽度200px */
+}
+
+#close-sidebar {
+    width: 50px;
+    float: right; /* 靠左对齐 */
+    background-color:#007bff;
+    margin-bottom: 20px;
+}
+
+#close-sidebar:hover {
+    background-color:#007bff;
+}

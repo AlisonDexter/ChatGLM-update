@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>知识库 - 法律知识管理系统</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="description" content="浏览和管理您的法律知识库文档，包括法律条文、政策文件、案例分析和合同模板等。">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="static/assets/images/favicon.png">
+
+    <!-- CSS
+	============================================ -->
+
+    <!-- Vendor CSS (Bootstrap & Icon Font) -->
+    <link rel="stylesheet" href="static/assets/css/vendor/font-awesome-pro.min.css">
+    <link rel="stylesheet" href="static/assets/css/vendor/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="static/assets/css/vendor/muli-font.css">
+
+    <!-- Plugins CSS (All Plugins Files) -->
+    
+    <link rel="stylesheet" href="static/assets/css/plugins/swiper.min.css">
+    <link rel="stylesheet" href="static/assets/css/plugins/animate.css">
+    <link rel="stylesheet" href="static/assets/css/plugins/aos.min.css">
+    <link rel="stylesheet" href="static/assets/css/plugins/magnific-popup.css">
+    
+
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="static/assets/css/style.css">
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+    <!-- <link rel="stylesheet" href="static/assets/css/vendor/vendor.min.css">
+    <link rel="stylesheet" href="static/assets/css/plugins/plugins.min.css">
+    <link rel="stylesheet" href="static/assets/css/style.min.css"> -->
+
+</head>
+<style>
+      body {
+            height: 100vh; /* 设置高度为视口高度 */
+            width: 100%; /* 设置宽度为100% */
+            margin: 0;
+            font-family: "Arial", sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            text-align: center;
+            
+            transition: margin-left 0.3s ease; /* 添加过渡效果 */
+        }
+        .search-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        #search-input {
+            width: 300px;
+            padding: 10px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .search-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .search-btn:hover {
+            background-color: #0056b3;
+        }
+        #results {
+            margin-top: 20px;
+            text-align: left;
+            display: inline-block;
+        }
+        #results li {
+            background: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            list-style: none;
+        }
+        .download-link {
+            color: #28a745;
+            text-decoration: none;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .download-link:hover {
+            text-decoration: underline;
+        }
+
+        .sidebar1 button.active,
+.sidebar2 button.active {
+    background-color: #007bff;
+    color: white;
+}
+        /* 侧边栏部分 */
+        .sidebar1 {
+    width: 100px; 
+    background-color: #f3f9ff;
+    color: white;
+    height: 100vh;
+    padding: 10px;
+    box-sizing: border-box;
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    z-index: 1000; 
+}
+
+.sidebar1 button {
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 15px;
+    width: 100%;
+    padding: 10px;
+    background-color: #daf0ff;
+    color: rgb(70, 129, 255);
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: width 0.3s ease, padding 0.3s ease;
+}
+
+.sidebar1.hidden {
+    display: none; /* 隐藏侧边栏1 */
+}
+
+.sidebar1 button:hover {
+    background-color: #bee5ff;
+}
+
+.sidebar1 #new-chat-btn:hover::after {
+    
+    font-size: 12px;
+    margin-left: 5px;
+}
+.sidebar2 {
+    width: 200px; /* 侧边栏2的宽度 */
+    background-color: #f3f9ff;
+    color: var(--dsr-text-1);
+    height: 100vh;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+    transform: translateX(-250%); /* 初始状态隐藏 */
+    position: fixed;
+    left: 0px; /* 与侧边栏1的宽度一致 */
+    top: 0;
+    z-index: 999; 
+}
+
+.sidebar2.expanded {
+    transform: translateX(0); /* 展开时显示 */
+}
+
+.sidebar2 button {
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 15px;
+    width: 100%;
+    padding: 10px;
+    background-color: #b2e0ff;
+    color: #4d6bfe;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: width 0.3s ease, padding 0.3s ease;
+}
+
+.sidebar2 button:hover {
+    background-color: #7dcbff;
+}
+
+.chat-history {
+    height: 60vh; /* 设置一个固定高度，可以根据需要调整 */
+    overflow-y: auto; /* 添加垂直滚动条 */
+}
+
+.chat-history h3 {
+    font-weight: 600;
+    padding: 0 10px 0 5px;
+    margin: 6px 0 0 0;
+    color: #555;
+    margin-top: 0;
+    margin-left: 4px;
+}
+
+.chat-history ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.chat-history ul li {
+    white-space: nowrap;
+    position: relative;
+    line-height: 18px;
+    display: flex; /* 启用 flexbox */
+    align-items: center; /* 垂直居中 */
+    height: 38px;
+    color: #363636;
+    font-weight: 500;
+    font-size: 12px;
+    border-radius: 15px;
+    padding: 0 10px;
+    cursor: pointer;
+    border-bottom: 1px solid rgb(var(--ds-rgb-blue-100));
+}
+
+.chat-history ul li:hover {
+    background-color: #d2edff;
+}
+
+.main-content {
+    margin-left: 60px; /* 与侧边栏1的宽度一致 */
+    transition: margin-left 0.3s ease; /* 添加过渡效果 */
+    width: calc(100% - 60px); /* 计算剩余宽度 */
+}
+
+.main-content.expanded {
+    margin-left: 200px; /* 侧边栏1宽度 + 侧边栏2宽度 */
+    width: calc(100% - 310px); /* 计算剩余宽度 */
+}
+
+#close-sidebar {
+    width: 50px;
+    float: right; /* 靠左对齐 */
+    background-color: #b2e0ff;
+    margin-bottom: 20px;
+}
+
+#close-sidebar:hover {
+    background-color: #a6dbff;
+}
+
+/* Tooltip文本样式 */
+.bubble {
+    position: relative; /* 确保伪元素可以正确定位 */
+}
+
+.bubble::after {
+    content: attr(data-tooltip);
+    visibility: hidden;
+    width: max-content;
+    background-color: rgba(94, 52, 52, 0.632); /* 更透明的棕色 */
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    margin: 5px 0;
+    padding: 10px 15px;
+    position: absolute;
+    z-index: 1000; /* 确保Tooltip在最上层 */
+    left: 150%; /* 将Tooltip放在元素下方 */
+    /* left: 50%; */
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.bubble:hover::after {
+    visibility: visible;
+    opacity: 1;
+}
+.header-inner{
+    z-index: 998; 
+}
+        
+</style>
+
+<body>
+
+    <div id="page" class="section">
+        <!-- Header Section Start -->
+        <div class="header-section header-transparent sticky-header section">
+            <div class="header-inner">
+                <div class="container position-relative">
+                    <div class="row justify-content-between align-items-center">
+
+                        <!-- Header Logo Start -->
+                        <div class="col-xl-2 col-auto order-0">
+                            <div class="header-logo">
+                                <a>
+                                    <img class="dark-logo" src="static/assets/images/logo/light-logo.png" alt="Agency Logo">
+                                    <img class="light-logo" src="static/assets/images/logo/light-logo.png" alt="Agency Logo">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Header Logo End -->
+
+                        <!-- Header Main Menu Start -->
+                        <div
+                            class="col-auto col-xl d-flex align-items-center justify-content-xl-center justify-content-end order-2 order-xl-1">
+                            <div class="menu-column-area d-none d-xl-block position-static">
+                                <nav class="site-main-menu">
+                                    <ul>
+                                        <li>
+                                            <a href="/home"><span
+                                                    class="menu-text">首页</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="/introduct"><span class="menu-text">用户使用手册</span></a>
+                                        </li>
+                                        <li>
+                                            <a class="active" href="/contact"><span class="menu-text">法律检索</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="/chatrobot"><span class="menu-text">颐年智伴助手</span></a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- Header Search Start -->
+                            <div class="header-search-area ml-xl-7 ml-0">
+
+                                <!-- Header Login Start -->
+
+                                <!-- Header Login End -->
+                            </div>
+                            <!-- Header Search End -->
+
+                            <!-- Header Mobile Menu Toggle Start -->
+                            <div class="header-mobile-menu-toggle d-xl-none ml-sm-2">
+                                <button class="toggle">
+                                    <i class="icon-top"></i>
+                                    <i class="icon-middle"></i>
+                                    <i class="icon-bottom"></i>
+                                </button>
+                            </div>
+                            <!-- Header Mobile Menu Toggle End -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header Section End -->
+
+        
+        <!-- 侧边栏 -->
+        <div class="sidebar1" id="sidebar1">
+            <button class="bubble" id="toggle-sidebar" data-tooltip="打开侧边栏">☰</button>
+           
+            <button class="bubble" id="new-chat-btn"data-tooltip="开启新对话">+</button>
+            <button class="bubble" data-tooltip="法律咨询">🤖</button>
+            <button class="bubble" data-tooltip="法律检索">🔍</button>
+            <button class="bubble active" data-tooltip="知识库">📚</button>
+        </div>
+        <div class="sidebar2" id="sidebar2">
+            <button class="bubble" data-tooltip="收起侧边栏" id="close-sidebar">➜</button>
+            <button id="new-chat-btn-expanded">+ 开启新对话</button>
+            <button>🤖法律咨询</button>
+            <button>🔍法律检索</button>
+            <button  class="bubble active" data-tooltip="知识库">📚知识库</button>
+            <div class="chat-history">
+                <h3>今天</h3>
+                <ul id="today-list">
+                    <!-- Today's chat history items will be dynamically added here -->
+                </ul>
+                <h3>昨天</h3>
+                <ul id="yesterday-list">
+                    <!-- Yesterday's chat history items will be dynamically added here -->
+                </ul>
+                <h3>7天内</h3>
+                <ul id="last-week-list">
+                    <!-- Last week's chat history items will be dynamically added here -->
+                </ul>
+                <h3>30天内</h3>
+                <ul id="last-month-list">
+                    <!-- Last month's chat history items will be dynamically added here -->
+                </ul>
+            </div>
+        </div>
+    
+        <div class="main-content" id="main-content">
+            <!-- Main content goes here -->
+<!-- 侧边栏以外的都放这里 -->
+<div class="main-content" id="main-content">
+    <!-- 知识库内容 -->
+    <div class="section section-padding-top section-padding-bottom-200" data-bg-color="#f8faff">
+        <div class="container">
+            <div class="row">
+                <!-- 知识库标题 -->
+                <div class="col-12 text-center">
+                    <h1>📚 知识库</h1>
+                    <p>浏览和管理您的知识库文档。</p>
+                </div>
+
+                <!-- 知识库分类 -->
+                <div class="col-12">
+                    <h2>分类</h2>
+                    <ul id="knowledge-categories">
+                        <li><a href="#category1">法律文档</a></li>
+                        <li><a href="#category2">政策文件</a></li>
+                        <li><a href="#category3">案例分析</a></li>
+                        <li><a href="#category4">合同模板</a></li>
+                    </ul>
+                </div>
+
+                <!-- 知识库文档列表 -->
+                <div class="col-12">
+                    <h2>文档列表</h2>
+                    <ul id="knowledge-documents">
+                        <li><a href="/document1">文档1：法律条文解读</a></li>
+                        <li><a href="/document2">文档2：政策解读</a></li>
+                        <li><a href="/document3">文档3：案例分析报告</a></li>
+                        <li><a href="/document4">文档4：合同模板</a></li>
+                    </ul>
+                </div>
+
+                <!-- 知识库搜索 -->
+                <div class="col-12">
+                    <h2>搜索知识库</h2>
+                    <div class="search-container">
+                        <input type="text" id="knowledge-search-input" placeholder="请输入关键词">
+                        <button class="search-btn" onclick="searchKnowledge()">搜索</button>
+                    </div>
+                    <ul id="knowledge-results"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+
+        
+        
+        <!-- Contact Information Section End -->
+
+
+        <!-- Scroll Top Start -->
+        <a href="#" class="scroll-top" id="scroll-top">
+            <i class="arrow-top fal fa-long-arrow-up"></i>
+            <i class="arrow-bottom fal fa-long-arrow-up"></i>
+        </a>
+        <!-- Scroll Top End -->
+    </div>
+
+    <div id="site-main-mobile-menu" class="site-main-mobile-menu">
+        <div class="site-main-mobile-menu-inner">
+            <div class="mobile-menu-header">
+                <div class="mobile-menu-logo">
+                    <a href="index.html"><img src="static/assets/images/logo/light-logo.png" alt=""></a>
+                </div>
+                <div class="mobile-menu-close">
+                    <button class="toggle">
+                        <i class="icon-top"></i>
+                        <i class="icon-bottom"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mobile-menu-content">
+                <nav class="site-mobile-menu">
+                    <ul>
+                        <li>
+                            <a href="/home"><span class="menu-text">首页</span></a>
+                        </li>
+                        <li>
+                            <a href="about.html"><span class="menu-text">介绍</span></a>
+                        </li>
+                        <li>
+                            <a href="service.html"><span class="menu-text">Services</span></a>
+                        </li>
+                        <li class="has-children">
+                            <a href="work.html"><span class="menu-text">Work</span></a>
+                            <span class="menu-toggle"><i class="far fa-angle-down"></i></span>
+                            <ul class="sub-menu">
+                                <li><a href="work.html"><span class="menu-text">Work</span></a></li>
+                                <li><a href="work-details.html"><span class="menu-text">Work Details</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="has-children">
+                            <a href="#"><span class="menu-text">Blog</span></a>
+                            <span class="menu-toggle"><i class="far fa-angle-down"></i></span>
+                            <ul class="sub-menu">
+                                <li><a href="blog-classic.html"><span class="menu-text">Blog Classic</span></a></li>
+                                <li><a href="blog-details.html"><span class="menu-text">Blog Details</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="contact-us.html"><span class="menu-text">Contact Us</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- JS
+============================================ -->
+
+<script>
+ // 搜索函数
+function searchDocuments() {
+    // 获取搜索关键词
+    const query = document.getElementById("search-input").value.trim();
+    if (!query) {
+        alert("请输入搜索内容！");
+        return;
+    }
+
+    // 显示进度条
+    const progressContainer = document.getElementById("progressContainer");
+    const progressBar = document.getElementById("progress");
+    progressContainer.style.display = "block";
+    progressBar.value = 0;
+
+    // 发送 AJAX 请求
+    fetch("/search", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query: query }),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("网络响应错误");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            // 隐藏进度条
+            progressContainer.style.display = "none";
+
+            // 显示搜索结果
+            const resultsContainer = document.getElementById("results");
+            resultsContainer.innerHTML = ""; // 清空之前的结果
+
+            if (data.results && data.results.length > 0) {
+                data.results.forEach((file) => {
+                    const listItem = document.createElement("li");
+                    const link = document.createElement("a");
+                    link.href = `/download/${file}`; // 下载链接
+                    link.textContent = file; // 文件名
+                    listItem.appendChild(link);
+                    resultsContainer.appendChild(listItem);
+                });
+            } else {
+                resultsContainer.innerHTML = "<li>未找到相关文档。</li>";
+            }
+        })
+        .catch((error) => {
+            console.error("搜索失败：", error);
+            alert("搜索失败，请稍后再试");
+            progressContainer.style.display = "none";
+        });
+}
+
+// 绑定事件（确保 DOM 加载完成后再绑定）
+document.addEventListener("DOMContentLoaded", function () {
+    const searchBtn = document.querySelector(".search-btn");
+    if (searchBtn) {
+        searchBtn.addEventListener("click", searchDocuments);
+    } else {
+        console.error("搜索按钮未找到！");
+    }
+});
+
+
+// 侧边栏js
+document.getElementById('toggle-sidebar').addEventListener('click', function() {
+    const sidebar1 = document.getElementById('sidebar1');
+    const sidebar2 = document.getElementById('sidebar2');
+    const mainContent = document.getElementById('main-content');
+
+    sidebar2.classList.toggle('expanded'); // 切换侧边栏2的展开状态
+    sidebar1.classList.toggle('hidden'); // 切换侧边栏1的显示状态
+    mainContent.classList.toggle('expanded'); // 调整主内容区域的左边距
+});
+
+// 收起侧边栏2并显示侧边栏1
+document.getElementById('close-sidebar').addEventListener('click', function () {
+    const sidebar1 = document.getElementById('sidebar1');
+    const sidebar2 = document.getElementById('sidebar2');
+    const mainContent = document.getElementById('main-content');
+
+    sidebar2.classList.remove('expanded'); // 收起侧边栏2
+    sidebar1.classList.remove('hidden'); // 显示侧边栏1
+    mainContent.classList.remove('expanded'); // 恢复主内容区域的左边距
+});
+document.getElementById('new-chat-btn').addEventListener('click', function() {
+    const todayList = document.getElementById('today-list');
+    const newChatItem = document.createElement('li');
+    const chatId = 'chat-' + (todayList.children.length + 1);
+
+    newChatItem.textContent = '新对话 ' + (todayList.children.length + 1);
+    newChatItem.id = chatId;
+    newChatItem.classList.add('bubble'); // 添加 bubble 类
+    newChatItem.setAttribute('data-tooltip',"点击查看对话"); // 设置 Tooltip 内容
+    todayList.appendChild(newChatItem);
+
+    // You can add more functionality here, like opening the new chat in the main content area
+});
+
+document.getElementById('new-chat-btn-expanded').addEventListener('click', function() {
+    const todayList = document.getElementById('today-list');
+    const newChatItem = document.createElement('li');
+    const chatId = 'chat-' + (todayList.children.length + 1);
+    newChatItem.textContent = '新对话 ' + (todayList.children.length + 1);
+    newChatItem.id = chatId;
+    todayList.appendChild(newChatItem);
+});
+
+document.getElementById('today-list').addEventListener('click', function(event) {
+    if (event.target.tagName === 'LI') {
+        const chatId = event.target.id;
+        // You can add functionality to load the selected chat in the main content area
+        console.log('Selected chat:', chatId);
+    }
+});
+document.querySelector('.sidebar1 button[data-tooltip="法律检索"]').addEventListener('click', function() {
+    window.location.href = "/contract";
+});
+// 绑定侧边栏的“知识库”按钮
+document.querySelector('.sidebar1 button[data-tooltip="知识库"]').addEventListener('click', function() {
+    window.location.href = "/知识库"; // 跳转到知识库页面
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const knowledgeBaseButton = document.querySelector('.sidebar1 button[data-tooltip="知识库"]');
+    if (knowledgeBaseButton) {
+        knowledgeBaseButton.classList.add("active");
+    }
+
+    const knowledgeBaseButtonExpanded = document.querySelector('.sidebar2 button[data-tooltip="知识库"]');
+    if (knowledgeBaseButtonExpanded) {
+        knowledgeBaseButtonExpanded.classList.add("active");
+    }
+});
+
+function searchKnowledge() {
+    const query = document.getElementById("knowledge-search-input").value.trim();
+    if (!query) {
+        alert("请输入搜索内容！");
+        return;
+    }
+
+    // 显示进度条
+    const progressContainer = document.createElement("div");
+    progressContainer.id = "progressContainer";
+    progressContainer.innerHTML = "<p>搜索中...</p><progress id='progress' value='0' max='100' style='width: 100%;'></progress>";
+    document.body.appendChild(progressContainer);
+
+    // 发送 AJAX 请求
+    fetch("/search-knowledge", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query: query }),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("网络响应错误");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            // 隐藏进度条
+            progressContainer.remove();
+
+            // 显示搜索结果
+            const resultsContainer = document.getElementById("knowledge-results");
+            resultsContainer.innerHTML = ""; // 清空之前的结果
+
+            if (data.results && data.results.length > 0) {
+                data.results.forEach((doc) => {
+                    const listItem = document.createElement("li");
+                    const link = document.createElement("a");
+                    link.href = `/knowledge/${doc.id}`; // 文档详情链接
+                    link.textContent = doc.title; // 文档标题
+                    listItem.appendChild(link);
+                    resultsContainer.appendChild(listItem);
+                });
+            } else {
+                resultsContainer.innerHTML = "<li>未找到相关文档。</li>";
+            }
+        })
+        .catch((error) => {
+            console.error("搜索失败：", error);
+            alert("搜索失败，请稍后再试");
+            progressContainer.remove();
+        });
+}
+
+
+</script>
+
+
+    <!-- Vendors JS -->
+    <script src="static/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="static/assets/js/vendor/jquery-3.4.1.min.js"></script>
+    <script src="static/assets/js/vendor/jquery-migrate-3.1.0.min.js"></script>
+    <script src="static/assets/js/vendor/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugins JS -->
+    <script src="static/assets/js/plugins/aos.min.js"></script>
+    <script src="static/assets/js/plugins/imagesloaded.pkgd.min.js"></script>
+    <script src="static/assets/js/plugins/isotope.pkgd.min.js"></script>
+    <script src="static/assets/js/plugins/parallax.min.js"></script>
+    <script src="static/assets/js/plugins/jquery.ajaxchimp.min.js"></script>
+    <script src="static/assets/js/plugins/jquery.counterup.min.js"></script>
+    <script src="static/assets/js/plugins/jquery.magnific-popup.min.js"></script>
+    <script src="static/assets/js/plugins/svg-inject.min.js"></script>
+    <script src="static/assets/js/plugins/swiper.min.js"></script>
+    <script src="static/assets/js/plugins/vanilla-tilt.min.js"></script>
+    <script src="static/assets/js/plugins/vivus.min.js"></script>
+    <script src="static/assets/js/plugins/waypoints.min.js"></script>
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+    <!-- <script src="static/assets/js/vendor/vendor.min.js"></script>
+    <script src="static/assets/js/plugins/plugins.min.js"></script> -->
+
+    <!-- Main Activation JS -->
+    <script src="static/assets/js/main.js"></script>
+
+
+
+
+
+</body>
+
+</html>
